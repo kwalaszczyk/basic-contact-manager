@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/contacts")
+@CrossOrigin
 public class ContactsController {
 
     private ContactService contactService;
