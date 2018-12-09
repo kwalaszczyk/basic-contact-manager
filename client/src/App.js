@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import Contacts from "./components/contacts/Contacts";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   render() {
