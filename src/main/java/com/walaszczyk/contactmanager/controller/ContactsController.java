@@ -3,7 +3,6 @@ package com.walaszczyk.contactmanager.controller;
 import com.walaszczyk.contactmanager.domain.Contact;
 import com.walaszczyk.contactmanager.exceptions.ContactNotFoundException;
 import com.walaszczyk.contactmanager.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping(value = "/api/contacts")
 public class ContactsController {
 
-    @Autowired
     private ContactService contactService;
+
+    public ContactsController(ContactService contactService){
+        this.contactService = contactService;
+    }
 
     @GetMapping
     public List<Contact> getAllContacts(){

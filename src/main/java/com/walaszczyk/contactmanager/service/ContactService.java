@@ -10,8 +10,11 @@ import java.util.Optional;
 
 @Service
 public class ContactService {
-    @Autowired
     private ContactsRepository contactsRepository;
+
+    public ContactService(ContactsRepository contactsRepository) {
+        this.contactsRepository = contactsRepository;
+    }
 
     public List<Contact> getAllContacts(){
         return contactsRepository.findAll();
