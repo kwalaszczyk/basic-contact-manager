@@ -26,7 +26,7 @@ public class ContactsController {
     }
 
     @PostMapping()
-    public Contact addContact(@RequestBody Contact contact){
+    public Contact addContact(@RequestBody Contact contact) {
         return contactService.addContact(contact);
     }
 }
