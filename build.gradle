@@ -29,6 +29,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-rest')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     runtimeOnly('com.h2database:h2')
+    compile "io.springfox:springfox-swagger2:2.9.2"
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
     compileOnly 'org.projectlombok:lombok:1.18.4'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
