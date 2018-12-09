@@ -39,7 +39,12 @@ public class ContactService {
         });
     }
 
-    public void deleteContact(Long id) {
-        contactsRepository.deleteById(id);
+    public boolean deleteContact(Long id) {
+        try {
+            contactsRepository.deleteById(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 }
