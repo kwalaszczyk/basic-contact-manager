@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Contacts from "./components/contacts/Contacts";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 class App extends Component {
   render() {
