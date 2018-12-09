@@ -1,0 +1,12 @@
+.card i {
+  cursor: pointer;
+}
+.card i.fa-times {
+  float: right;
+  color: red;
+}
+.card i.fa-pencil-alt {
+  float: right;
+  color: #253c70;
+  margin-right: 1rem;
+}
