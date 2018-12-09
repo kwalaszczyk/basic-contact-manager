@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { getContacts } from "../../actions/contactActions";
+import Contact from "./Contact";
 
 class Contacts extends Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class Contacts extends Component {
           <span className="text-primary">Contact</span> List
         </h1>
         {contacts.map(contact => (
-          <div>{contact["name"]}</div>
+          <Contact key={contact.id} contact={contact} />
         ))}
       </React.Fragment>
     );
