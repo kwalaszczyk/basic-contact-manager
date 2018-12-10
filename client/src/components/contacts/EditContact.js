@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import InputTextField from "../layout/InputTextField";
+import { getContact } from "../../actions/contactActions";
+import { connect } from "react-redux";
 
 class EditContact extends Component {
   state = {
@@ -20,6 +22,7 @@ class EditContact extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+    this.props.getContact(id);
   }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -77,4 +80,11 @@ class EditContact extends Component {
   }
 }
 
-export default EditContact;
+const mapStateToPros = state => ({
+  contact: state.contact.contact
+});
+
+export default connect(
+  mapStateToPros,
+  { getContact }
+)(EditContact);
