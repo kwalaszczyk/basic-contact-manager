@@ -20,7 +20,7 @@ class Contact extends Component {
             className="fas fa-times"
             onClick={this.onDeleteClick.bind(this, id)}
           />
-          <Link to={`contact/edit/${id}`}>
+          <Link to={`contact/${id}`}>
             <i className="fas fa-pencil-alt" />
           </Link>
         </h4>
