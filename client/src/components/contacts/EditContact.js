@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import InputTextField from "../layout/InputTextField";
-import { getContact } from "../../actions/contactActions";
+import { getContact, updateContact } from "../../actions/contactActions";
 import { connect } from "react-redux";
 
 class EditContact extends Component {
   state = {
     name: "",
     surname: "",
-    phone: "",
+    phoneNumber: "",
     errors: {}
   };
 
   componentWillReceiveProps(nextProps) {
-    const { name, surname, phone } = nextProps.contact;
+    const { name, surname, phoneNumber } = nextProps.contact;
     this.setState({
       name,
       surname,
-      phone
+      phoneNumber
     });
   }
 
@@ -29,11 +29,47 @@ class EditContact extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    const { name, surname, phoneNumber } = this.state;
+
+    // Check For Errors
+    if (name === "") {
+      this.setState({ errors: { name: "Name is required" } });
+      return;
+    }
+
+    if (surname === "") {
+      this.setState({ errors: { surname: "Surname is required" } });
+      return;
+    }
+
+    if (phoneNumber === "") {
+      this.setState({ errors: { phoneNumber: "Phone is required" } });
+      return;
+    }
+
+    const { id } = this.props.match.params;
+
+    const updContact = {
+      id,
+      name,
+      surname,
+      phoneNumber
+    };
+
+    this.props.updateContact(updContact);
+
+    // Clear State
+    this.setState({
+      name: "",
+      surname: "",
+      phoneNumber: "",
+      errors: {}
+    });
     this.props.history.push("/");
   };
 
   render() {
-    const { name, surname, phone, errors } = this.state;
+    const { name, surname, phoneNumber, errors } = this.state;
     return (
       <div>
         <div className="card mb-3">
@@ -58,12 +94,12 @@ class EditContact extends Component {
                 error={errors.surname}
               />
               <InputTextField
-                label="Phone"
-                name="phone"
+                label="phoneNumber"
+                name="phoneNumber"
                 placeholder="Enter Phone"
-                value={phone}
+                value={phoneNumber}
                 onChange={this.onChange}
-                error={errors.phone}
+                error={errors.phoneNumber}
               />
               <div className="text-center">
                 <input
@@ -86,5 +122,5 @@ const mapStateToPros = state => ({
 
 export default connect(
   mapStateToPros,
-  { getContact }
+  { getContact, updateContact }
 )(EditContact);
