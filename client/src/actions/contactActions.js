@@ -2,7 +2,8 @@ import {
   GET_CONTACTS,
   DELETE_CONTACT,
   GET_CONTACT,
-  UPDATE_CONTACT
+  UPDATE_CONTACT,
+  ADD_CONTACT
 } from "./types";
 
 import axios from "axios";
@@ -20,6 +21,14 @@ export const getContact = id => async dispatch => {
   dispatch({
     type: GET_CONTACT,
     payload: res.data
+  });
+};
+
+export const addContact = contact => async dispatch => {
+  const res = await axios.post(`/api/contacts/`, contact);
+  dispatch({
+    type: ADD_CONTACT,
+    payload: contact
   });
 };
 

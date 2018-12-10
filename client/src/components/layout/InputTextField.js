@@ -9,7 +9,9 @@ const InputTextField = ({
   placeholder,
   type,
   onChange,
-  error
+  onBlur,
+  error,
+  showMarkError
 }) => {
   return (
     <div className="form-group">
@@ -18,13 +20,14 @@ const InputTextField = ({
         type={type}
         name={name}
         className={classnames("form-control form-control-lg", {
-          "is-invalid": error
+          "is-invalid": showMarkError
         })}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
       />
-      {error && <div className="invalid-feedback">{error}</div>}
+      {showMarkError && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };
@@ -36,7 +39,9 @@ InputTextField.propTypes = {
   value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  error: PropTypes.string
+  onBlur: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  showMarkError: PropTypes.func.isRequired
 };
 
 InputTextField.defaultProps = {
