@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -28,15 +29,21 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> roles;
 
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "userid")
+    private Set<Contact> contacts;
+
     public User() {
     }
 
-    public User(@NotEmpty(message = "First name is required.") String firstName, @NotEmpty(message = "Last name is required.") String lastName, @Email(message = "Please provide a valid email address.") @NotEmpty(message = "Email is required.") String email, @NotEmpty(message = "Password is required.") String password, List<Role> roles) {
+    public User(@NotEmpty(message = "First name is required.") String firstName, @NotEmpty(message = "Last name is required.") String lastName, @Email(message = "Please provide a valid email address.") @NotEmpty(message = "Email is required.") String email, @NotEmpty(message = "Password is required.") String password, List<Role> roles, Set<Contact> contacts) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.contacts = contacts;
     }
 
     public User(User user) {
@@ -46,6 +53,7 @@ public class User {
         this.email = user.email;
         this.password = user.password;
         this.roles = user.roles;
+        this.contacts = user.contacts;
     }
 
     public String getPassword() {
@@ -94,6 +102,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     @Override

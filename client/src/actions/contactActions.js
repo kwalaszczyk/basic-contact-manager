@@ -3,7 +3,8 @@ import {
   DELETE_CONTACT,
   GET_CONTACT,
   UPDATE_CONTACT,
-  ADD_CONTACT
+  ADD_CONTACT,
+  CLEAR_CONTACTS
 } from "./types";
 
 import axios from "axios";
@@ -25,7 +26,8 @@ export const getContact = id => async dispatch => {
 };
 
 export const addContact = contact => async dispatch => {
-  await axios.post(`/api/contacts/`, contact);
+  const res = await axios.post(`/api/contacts/`, contact);
+  contact.id = res.headers.location.split("/").pop();
   dispatch({
     type: ADD_CONTACT,
     payload: contact
@@ -45,5 +47,11 @@ export const deleteContact = id => async dispatch => {
   dispatch({
     type: DELETE_CONTACT,
     payload: id
+  });
+};
+
+export const clearContacts = () => async dispatch => {
+  dispatch({
+    type: CLEAR_CONTACTS
   });
 };

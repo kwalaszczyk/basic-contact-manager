@@ -19,6 +19,22 @@ export const loginUser = user => async dispatch => {
     .catch(console.log);
 };
 
+export const registerUser = user => async dispatch => {
+  axios
+    .post("/api/users/signup", user)
+    .then(res => {
+      const token = res.data;
+      localStorage.setItem("jwtToken", token);
+
+      setAuthToken(token);
+
+      const decoded = jwt_decode(token);
+
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(console.log);
+};
+
 export const logoutUser = history => async dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthToken(false);

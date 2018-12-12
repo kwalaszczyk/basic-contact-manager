@@ -15,6 +15,11 @@ public class ContactService {
         this.contactsRepository = contactsRepository;
     }
 
+    public List<Contact> getContactsByUserId(Long userId){
+        return contactsRepository.findByUserid(userId);
+//        return contactsRepository.findAll();
+    }
+
     public List<Contact> getAllContacts(){
         return contactsRepository.findAll();
     }

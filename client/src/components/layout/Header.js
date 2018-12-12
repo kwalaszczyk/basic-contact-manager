@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { clearContacts } from "../../actions/contactActions";
 import { withRouter } from "react-router-dom";
 
 class Header extends Component {
   onLogoutClick = ev => {
     ev.preventDefault();
     this.props.logoutUser(this.props.history);
+    this.props.clearContacts();
   };
   render() {
     const { isAuthenticated, user } = this.props.auth;
@@ -36,6 +38,11 @@ class Header extends Component {
         <li className="nav-item">
           <Link to="/login" className="nav-link">
             <i className="fa fa-user" /> LogMe
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/signup" className="nav-link">
+            <i className="fa fa-user-plus" /> SignUp
           </Link>
         </li>
       </React.Fragment>
@@ -74,5 +81,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, clearContacts }
 )(withRouter(Header));

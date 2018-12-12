@@ -11,6 +11,7 @@ import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import AddContact from "./components/contacts/AddContact";
 import Login from "./components/pages/Login";
+import Signup from "./components/pages/Signup";
 import PrivateRoute from "./components/common/PrivateRoute";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
@@ -42,6 +43,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/" component={Contacts} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/:id" component={EditContact} />
                 <Route exact path="/about" component={About} />

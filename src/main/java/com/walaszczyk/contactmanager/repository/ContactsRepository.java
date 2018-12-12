@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface ContactsRepository extends CrudRepository<Contact, Long> {
     List<Contact> findAll();
+    List<Contact> findByUserid(Long userid);
 
 }
