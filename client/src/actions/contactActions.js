@@ -25,7 +25,7 @@ export const getContact = id => async dispatch => {
 };
 
 export const addContact = contact => async dispatch => {
-  const res = await axios.post(`/api/contacts/`, contact);
+  await axios.post(`/api/contacts/`, contact);
   dispatch({
     type: ADD_CONTACT,
     payload: contact
