@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
@@ -8,7 +7,7 @@ import { withRouter } from "react-router-dom";
 class Header extends Component {
   onLogoutClick = ev => {
     ev.preventDefault();
-    console.log("logout");
+    this.props.logoutUser(this.props.history);
   };
   render() {
     const { isAuthenticated, user } = this.props.auth;
@@ -26,7 +25,7 @@ class Header extends Component {
             className="nav-link"
             style={{ cursor: "pointer" }}
           >
-            <i className="fas fa-sign-out-alt" /> Logout
+            <i className="fas fa-sign-out-alt" /> Logout ({user.sub})
           </a>
         </li>
       </React.Fragment>
@@ -68,14 +67,6 @@ class Header extends Component {
     );
   }
 }
-
-Header.defaultProps = {
-  branding: "Contact Manager"
-};
-
-Header.propTypes = {
-  branding: PropTypes.string.isRequired
-};
 
 const mapStateToProps = state => ({
   auth: state.auth

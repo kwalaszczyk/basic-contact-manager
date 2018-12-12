@@ -11,6 +11,7 @@ import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import AddContact from "./components/contacts/AddContact";
 import Login from "./components/pages/Login";
+import PrivateRoute from "./components/common/PrivateRoute";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -39,7 +40,7 @@ class App extends Component {
             <Header branding="Contact Manager" />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={Contacts} />
+                <PrivateRoute exact path="/" component={Contacts} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/:id" component={EditContact} />

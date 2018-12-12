@@ -19,8 +19,11 @@ export const loginUser = user => async dispatch => {
     .catch(console.log);
 };
 
-export const logoutUser = () => async dispatch => {
-  console.log("logout");
+export const logoutUser = history => async dispatch => {
+  localStorage.removeItem("jwtToken");
+  setAuthToken(false);
+  if (history != null) history.push("/");
+  dispatch(setCurrentUser({}));
 };
 
 export const setCurrentUser = decoded => {
