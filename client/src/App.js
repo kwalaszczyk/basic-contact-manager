@@ -11,6 +11,24 @@ import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import AddContact from "./components/contacts/AddContact";
 import Login from "./components/pages/Login";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import setAuthToken from "./utils/setAuthToken";
+import jwt_decode from "jwt-decode";
+
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  setAuthToken(localStorage.jwtToken);
+
+  // Decode token and get user info
+  const decoded = jwt_decode(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(decoded));
+
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    store.dispatch(logoutUser());
+    if (window.location != null) window.location.href = "/login";
+  }
+}
 
 class App extends Component {
   render() {
