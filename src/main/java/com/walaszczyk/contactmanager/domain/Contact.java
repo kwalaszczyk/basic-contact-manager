@@ -3,9 +3,7 @@ package com.walaszczyk.contactmanager.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,6 +15,7 @@ public class Contact {
     private String name;
     private String surname;
     private String phoneNumber;
+    private Long userid;
 
     public Contact(String name, String surname, String phoneNumber) {
         this.name = name;

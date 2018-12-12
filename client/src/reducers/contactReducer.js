@@ -3,7 +3,8 @@ import {
   DELETE_CONTACT,
   GET_CONTACT,
   UPDATE_CONTACT,
-  ADD_CONTACT
+  ADD_CONTACT,
+  CLEAR_CONTACTS
 } from "../actions/types";
 
 const initialState = {
@@ -23,11 +24,11 @@ export default function(state = initialState, action) {
         ...state,
         contact: action.payload
       };
-    // case ADD_CONTACT:
-    //   return {
-    //     ...state,
-    //     contacts: [action.payload, ...state.contacts]
-    //   };
+    case ADD_CONTACT:
+      return {
+        ...state,
+        contacts: [action.payload, ...state.contacts]
+      };
     case UPDATE_CONTACT:
       return {
         ...state,
@@ -42,6 +43,11 @@ export default function(state = initialState, action) {
         contacts: state.contacts.filter(
           contact => contact.id !== action.payload
         )
+      };
+    case CLEAR_CONTACTS:
+      return {
+        ...state,
+        contacts: []
       };
     default:
       return state;

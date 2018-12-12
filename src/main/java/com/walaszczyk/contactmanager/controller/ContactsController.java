@@ -1,9 +1,12 @@
 package com.walaszczyk.contactmanager.controller;
 
 import com.walaszczyk.contactmanager.domain.Contact;
+import com.walaszczyk.contactmanager.domain.User;
 import com.walaszczyk.contactmanager.exceptions.ContactNotFoundException;
 import com.walaszczyk.contactmanager.service.ContactService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,7 +26,8 @@ public class ContactsController {
 
     @GetMapping
     public List<Contact> getAllContacts(){
-        return contactService.getAllContacts();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return contactService.getContactsByUserId(((User)authentication.getPrincipal()).getId());
     }
 
     @GetMapping(value = "/{id}")
@@ -33,6 +37,8 @@ public class ContactsController {
 
     @PostMapping()
     public ResponseEntity<?> addContact(@RequestBody Contact newContact) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        newContact.setUserid(((User)authentication.getPrincipal()).getId());
         Contact addedContact = contactService.addContact(newContact);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
