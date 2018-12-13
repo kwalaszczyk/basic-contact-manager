@@ -15,7 +15,6 @@ Warning: Due to limitations of the basic account on the Heroku platform, the app
 * Spring Data
 * React
 * Redux
-* React
 * React-Router
 * Json Web Token
 * H2 Database
