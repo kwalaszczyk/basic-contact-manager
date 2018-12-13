@@ -3,6 +3,7 @@ Warning: Due to limitations of the basic account on the Heroku platform, the app
 
 ### TODO
 * Add form validation for every page (for now it has been implemented only on add-contact page) 
+* Add tests
 * Improve web design
 
 <img src="https://i.imgur.com/QAmCYgb.png"/>
